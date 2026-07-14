@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+html{scroll-behavior:smooth}
+body{margin:0;background:#ffffff;color:#172016;font-family:'Archivo',Arial,sans-serif;line-height:1.5}
+a{color:#45813C}a:hover{color:#315f2b}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes spinR{from{transform:rotate(0deg)}to{transform:rotate(-360deg)}}
+@keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+@keyframes reveal{from{opacity:0;transform:translateY(42px)}to{opacity:1;transform:translateY(0)}}
+@keyframes revealLeft{from{opacity:0;transform:translateX(-28px)}to{opacity:1;transform:translateX(0)}}
+@keyframes popIn{from{opacity:0;transform:scale(.2)}to{opacity:1;transform:scale(1)}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 8px #ffffff,0 0 0 10px rgba(69,129,60,.28)}50%{box-shadow:0 0 0 8px #ffffff,0 0 0 18px rgba(69,129,60,.06)}}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes zoomIn{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+@keyframes blink{0%,80%,100%{opacity:.25}40%{opacity:1}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none !important}}
+</style>
+</helmet>
+<main style="position:relative;z-index:0;overflow:clip;background:#ffffff" data-screen-label="Timeline CDM">
+
+  <header style="display:flex;align-items:center;gap:12px;max-width:1200px;margin:0 auto;padding:22px 24px;background:#ffffff;animation:rise .6s ease both">
+    <img src="assets/logo.png" alt="Logo CDM" width="38" height="38" style="display:block;width:38px;height:38px">
+    <div style="font-size:16px;font-weight:700;letter-spacing:.02em">CDM</div>
+    <div style="font-size:13px;color:#5f685e;border-left:1px solid #e0e5de;padding-left:12px;letter-spacing:.04em">Central de Dados Mestres</div>
+  </header>
+
+  <section style="max-width:1200px;margin:0 auto;padding:12px 24px 0;background:#ffffff" aria-label="Apresentação">
+    <div style="position:relative;display:flex;align-items:center;min-height:480px;border:1px solid #e4e8e2;border-radius:28px;background:#fdfdfc;overflow:hidden;box-shadow:0 24px 60px rgba(23,32,22,.07)">
+      <div style="position:relative;z-index:2;width:55%;padding:64px 0 64px 64px">
+        
+        <h1 style="margin:20px 0 0;font-size:56px;line-height:1.06;font-weight:800;letter-spacing:-.03em;background:linear-gradient(90deg,#45813C 0%,#45813C 80%,#EEB41E 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:#45813C;animation:rise .7s ease .12s both">A evolução do CDM</h1>
+        <p style="margin:20px 0 0;max-width:480px;font-size:19px;line-height:1.55;letter-spacing:-.01em;color:#5f685e;animation:rise .7s ease .22s both">Da governança de acessos à criação real de materiais no SAP: os marcos que transformaram o CDM em uma central de solicitações de ponta a ponta.</p>
+        <div style="margin-top:36px;animation:rise .7s ease .32s both">
+          <img src="assets/juparana.png" alt="Juparanã — Parceira do início ao fim" style="display:block;width:240px;height:auto">
+        </div>
+      </div>
+      <sc-if value="{{ mostrarOrbita }}" hint-placeholder-val="{{ true }}">
+        <div style="position:absolute;inset:0 0 0 auto;width:50%;overflow:hidden;animation:rise .9s ease .2s both" aria-hidden="true">
+          <div style="position:absolute;top:50%;left:78%;width:640px;height:640px;transform:translate(-50%,-50%)">
+            <div style="position:absolute;top:50%;left:50%;width:112px;height:112px;margin:-56px 0 0 -56px;border-radius:50%;background:#ffffff;box-shadow:0 12px 34px rgba(23,32,22,.14);display:flex;align-items:center;justify-content:center;animation:floaty 6s ease-in-out infinite">
+              <img src="assets/logo.png" alt="" width="66" height="66" style="display:block;width:66px;height:66px">
+            </div>
+            <div style="position:absolute;top:50%;left:50%;width:240px;height:240px;margin:-120px 0 0 -120px;border-radius:50%;border:2px dotted #cfd8cc;animation:spin 16s linear infinite">
+              <div style="position:absolute;left:50%;top:0%;transform:translate(-50%,-50%);width:38px;height:38px;border-radius:50%;background:#ffffff;box-shadow:0 4px 12px rgba(23,32,22,.16);display:flex;align-items:center;justify-content:center"><img src="assets/orbita/lovable.svg" alt="Lovable" width="20" height="20" style="display:block;width:20px;height:20px;animation:spinR 16s linear infinite"></div>
+              <div style="position:absolute;left:93.3%;top:75%;transform:translate(-50%,-50%);width:38px;height:38px;border-radius:50%;background:#ffffff;box-shadow:0 4px 12px rgba(23,32,22,.16);display:flex;align-items:center;justify-content:center"><img src="assets/orbita/supabase.svg" alt="Supabase" width="20" height="20" style="display:block;width:20px;height:20px;animation:spinR 16s linear infinite"></div>
+              <div style="position:absolute;left:6.7%;top:75%;transform:translate(-50%,-50%);width:38px;height:38px;border-radius:50%;background:#ffffff;box-shadow:0 4px 12px rgba(23,32,22,.16);display:flex;align-items:center;justify-content:center"><img src="assets/orbita/sap.svg" alt="SAP" width="22" height="22" style="display:block;width:22px;height:22px;animation:spinR 16s linear infinite"></div>
+            </div>
+            <div style="position:absolute;top:50%;left:50%;width:400px;height:400px;margin:-200px 0 0 -200px;border-radius:50%;border:2px dotted #d9ded7;animation:spinR 24s linear infinite">
+              <div style="position:absolute;left:50%;top:0%;transform:translate(-50%,-50%);width:36px;height:36px;border-radius:50%;background:#ffffff;box-shadow:0 4px 12px rgba(23,32,22,.14);display:flex;align-items:center;justify-content:center"><img src="assets/orbita/github.svg" alt="GitHub" width="19" height="19" style="display:block;width:19px;height:19px;animation:spin 24s linear infinite"></div>
+              <div style="position:absolute;left:93.3%;top:75%;transform:translate(-50%,-50%);width:36px;height:36px;border-radius:50%;background:#ffffff;box-shadow:0 4px 12px rgba(23,32,22,.14);display:flex;align-items:center;justify-content:center"><img src="assets/orbita/vite.svg" alt="Vite" width="19" height="19" style="display:block;width:19px;height:19px;animation:spin 24s linear infinite"></div>
+              <div style="position:absolute;left:6.7%;top:75%;transform:translate(-50%,-50%);width:36px;height:36px;border-radius:50%;background:#ffffff;box-shadow:0 4px 12px rgba(23,32,22,.14);display:flex;align-items:center;justify-content:center"><img src="assets/orbita/react.svg" alt="React" width="19" height="19" style="display:block;width:19px;height:19px;animation:spin 24s linear infinite"></div>
+            </div>
+            <div style="position:absolute;top:50%;left:50%;width:560px;height:560px;margin:-280px 0 0 -280px;border-radius:50%;border:2px dotted #e2e7e0;animation:spin 34s linear infinite">
+              <div style="position:absolute;left:50%;top:0%;transform:translate(-50%,-50%);width:34px;height:34px;border-radius:50%;background:#ffffff;box-shadow:0 4px 10px rgba(23,32,22,.12);display:flex;align-items:center;justify-content:center"><img src="assets/orbita/codex.svg" alt="Codex" width="18" height="18" style="display:block;width:18px;height:18px;animation:spinR 34s linear infinite"></div>
+              <div style="position:absolute;left:93%;top:75%;transform:translate(-50%,-50%);width:34px;height:34px;border-radius:50%;background:#ffffff;box-shadow:0 4px 10px rgba(23,32,22,.12);display:flex;align-items:center;justify-content:center"><img src="assets/orbita/claude.svg" alt="Claude" width="18" height="18" style="display:block;width:18px;height:18px;animation:spinR 34s linear infinite"></div>
+              <div style="position:absolute;left:7%;top:75%;transform:translate(-50%,-50%);width:34px;height:34px;border-radius:50%;background:#ffffff;box-shadow:0 4px 10px rgba(23,32,22,.12);display:flex;align-items:center;justify-content:center"><img src="assets/orbita/obsidian.svg" alt="Obsidian" width="18" height="18" style="display:block;width:18px;height:18px;animation:spinR 34s linear infinite"></div>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+    </div>
+  </section>
+
+  <section id="timeline" style="position:relative;z-index:-3;padding-top:40px" aria-label="Linha do tempo do CDM">
+    <div style="width:90vw;max-width:1360px;margin:0 auto">
+      <div style="position:relative;display:flex;max-width:1120px;margin:0 auto;flex-direction:column;align-items:center;justify-content:center">
+        <div style="position:absolute;z-index:-2;width:3px;height:100%;background:#e2e7e0" aria-hidden="true">
+          <div style="position:fixed;z-index:-1;top:0;bottom:50vh;width:3px;height:50vh;background:linear-gradient(180deg,#45813C 0%,#45813C 80%,#EEB41E 100%)"></div>
+        </div>
+
+        <sc-for list="{{ marcos }}" as="m" hint-placeholder-count="5">
+          <article data-marco="true" style="position:relative;z-index:2;display:grid;grid-template-columns:1fr 160px 1fr;width:100%;padding:64px 0" data-screen-label="{{ m.data }}">
+            <div style="text-align:right">
+              <div style="position:sticky;top:50vh">
+                <time data-marco-data="true" style="display:block;font-size:46px;font-weight:600;letter-spacing:-.03em;line-height:1.1;color:#172016;transition:color .45s,transform .45s;animation:revealLeft .8s ease both;animation-timeline:view();animation-range:entry 0% entry 55%">{{ m.data }}</time>
+                <div style="margin-top:6px;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#a4aca2;animation:revealLeft .8s ease both;animation-timeline:view();animation-range:entry 0% entry 60%">{{ m.rotulo }}</div>
+              </div>
+            </div>
+            <div style="display:flex;justify-content:center" aria-hidden="true">
+              <div style="position:sticky;top:50vh"><div data-marco-ponto="true" style="width:15px;height:15px;border-radius:50%;background:linear-gradient(135deg,#45813C,#EEB41E);transition:transform .45s cubic-bezier(.2,.8,.2,1);animation:pulse 3.2s ease-in-out infinite"></div></div>
+            </div>
+            <div>
+              <h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.015em;line-height:1.25;animation:reveal .8s ease both;animation-timeline:view();animation-range:entry 0% entry 50%">{{ m.titulo }}</h2>
+              <p style="margin:14px 0 0;max-width:480px;font-size:17px;line-height:1.6;color:#5f685e;animation:reveal .8s ease both;animation-timeline:view();animation-range:entry 0% entry 60%">{{ m.texto }}</p>
+              <sc-if value="{{ mostrarImagens }}" hint-placeholder-val="{{ true }}">
+                <div style="position:relative;margin-top:28px;max-width:480px;aspect-ratio:3/2;overflow:hidden;border:1px solid #e4e8e2;border-radius:16px;background:repeating-linear-gradient(45deg,#f6f8f5 0 14px,#f0f3ee 14px 28px);box-shadow:0 18px 45px rgba(23,32,22,.10);animation:reveal .9s ease both;animation-timeline:view();animation-range:entry 0% entry 70%">
+                  <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:ui-monospace,Menlo,monospace;font-size:12px;color:#8a938a">{{ m.img }}</div>
+                  <img src="{{ m.img }}" alt="{{ m.titulo }}" loading="lazy" onError="{{ ocultarQuebrada }}" onClick="{{ m.abrir }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;cursor:zoom-in;transition:transform .5s ease" style-hover="transform:scale(1.03)">
+                  <div data-marco-borda="true" aria-hidden="true" style="position:absolute;inset:0;z-index:2;border-radius:16px;padding:2px;background:linear-gradient(135deg,#45813C,#EEB41E);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask-composite:exclude;opacity:0;transform:scale(.985);transition:opacity .5s ease,transform .5s ease;pointer-events:none"></div>
+                </div>
+              </sc-if>
+            </div>
+          </article>
+        </sc-for>
+
+        <div style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:16px;width:100%;padding:48px 0 8px;background:#ffffff">
+          <div style="width:17px;height:17px;border-radius:50%;background:linear-gradient(135deg,#45813C,#EEB41E);animation:pulse 2.4s ease-in-out infinite"></div>
+          <div style="display:inline-flex;align-items:baseline;gap:4px;padding:9px 20px;border-radius:999px;border:1px solid rgba(69,129,60,.25);background:rgba(69,129,60,.06);font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#45813C">Em evolução contínua<span style="animation:blink 1.4s infinite">.</span><span style="animation:blink 1.4s .2s infinite">.</span><span style="animation:blink 1.4s .4s infinite">.</span></div>
+          <p style="margin:0;max-width:380px;text-align:center;font-size:14px;line-height:1.6;color:#8a938a">O desenvolvimento do CDM segue em andamento — novos marcos serão adicionados a esta linha do tempo.</p>
+        </div>
+
+        <div style="position:absolute;top:0;right:0;left:0;height:90px;pointer-events:none;background:linear-gradient(#ffffff,rgba(255,255,255,0))" aria-hidden="true"></div>
+        <div style="position:absolute;bottom:0;right:0;left:0;height:90px;pointer-events:none;background:linear-gradient(to top,#ffffff,rgba(255,255,255,0))" aria-hidden="true"></div>
+      </div>
+    </div>
+    <div style="height:44vh" aria-hidden="true"></div>
+  </section>
+
+  <footer style="display:flex;flex-direction:column;align-items:center;gap:10px;padding:0 24px 72px;text-align:center;background:#ffffff">
+    <div style="display:flex;align-items:center;gap:20px">
+      <img src="assets/juparana.png" alt="Juparanã" style="display:block;height:34px;width:auto">
+      <div style="width:1px;height:34px;background:#e0e5de"></div>
+      <img src="assets/logo.png" alt="CDM" width="34" height="34" style="display:block;width:34px;height:34px;opacity:.9">
+    </div>
+    <div style="font-size:13px;letter-spacing:.06em;color:#8a938a">CDM · Central de Dados Mestres · 2026</div>
+  </footer>
+
+  <sc-if value="{{ modalVisivel }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ fecharModal }}" style="position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;padding:40px;background:rgba(23,32,22,.45);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);animation:fadeIn .25s ease both;cursor:zoom-out" role="dialog" aria-modal="true" aria-label="Imagem ampliada">
+      <figure onClick="{{ pararClique }}" style="margin:0;max-width:min(1280px,92vw);background:#ffffff;border-radius:20px;padding:14px 14px 8px;box-shadow:0 40px 90px rgba(23,32,22,.4);animation:zoomIn .3s cubic-bezier(.2,.8,.2,1) both;cursor:default">
+        {{ modalImagem }}
+        <figcaption style="display:flex;align-items:baseline;gap:10px;padding:12px 8px 8px">
+          <span style="font-size:15px;font-weight:800;color:#45813C">{{ imagemAberta.data }}</span>
+          <span style="font-size:15px;font-weight:600;color:#172016">{{ imagemAberta.titulo }}</span>
+        </figcaption>
+      </figure>
+    </div>
+  </sc-if>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;mostrarImagens&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Conteúdo&quot;},&quot;mostrarOrbita&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Herói&quot;}}">
+class Component extends DCLogic {
+  state = { aberto: null };
+  componentDidMount() {
+    this._onKey = (e) => { if (e.key === "Escape") this.setState({ aberto: null }); };
+    document.addEventListener("keydown", this._onKey);
+    // Queries the live DOM each frame — robust to sc-for placeholder re-renders.
+    const aplicar = (el, ativo) => {
+      const dt = el.querySelector('[data-marco-data]');
+      const pt = el.querySelector('[data-marco-ponto]');
+      const bd = el.querySelector('[data-marco-borda]');
+      if (dt) dt.style.color = ativo ? "#45813C" : "#172016";
+      if (pt) pt.style.transform = ativo ? "scale(1.55)" : "scale(1)";
+      if (bd) { bd.style.opacity = ativo ? "1" : "0"; bd.style.transform = ativo ? "scale(1)" : "scale(.985)"; }
+    };
+    let agendado = false;
+    const atualizar = () => {
+      agendado = false;
+      const centro = window.innerHeight / 2;
+      document.querySelectorAll('[data-marco]').forEach((a) => {
+        const r = a.getBoundingClientRect();
+        aplicar(a, r.top <= centro && r.bottom >= centro);
+      });
+    };
+    this._onScroll = () => {
+      if (!agendado) { agendado = true; requestAnimationFrame(atualizar); }
+    };
+    window.addEventListener("scroll", this._onScroll, { passive: true });
+    window.addEventListener("resize", this._onScroll, { passive: true });
+    this._tick = setInterval(this._onScroll, 800);
+    this._onScroll();
+  }
+  componentWillUnmount() {
+    document.removeEventListener("keydown", this._onKey);
+    window.removeEventListener("scroll", this._onScroll);
+    window.removeEventListener("resize", this._onScroll);
+    if (this._tick) clearInterval(this._tick);
+  }
+  renderVals() {
+    const dados = [
+      ["02/06","Governança","Governança de acessos estabilizada","Permissões críticas protegidas, recuperação de acesso concluída e riscos de perda indevida de perfil eliminados."],
+      ["03/06","Importação","Importação em lote operacional","CDM passou a processar cadastros em massa com validação, acompanhamento por item e retorno do resultado do SAP.","assets/timeline-02.png"],
+      ["04/06","Padronização","Cadastro padronizado","Formulário, configurações e importação passaram a usar mesma estrutura, reduzindo divergências e retrabalho."],
+      ["11/06","Dados","Base única consolidada","Estrutura oficial do cadastro foi consolidada como fonte única para telas, regras e templates do CDM."],
+      ["22/06","Governança","Novo modelo de governança","CDM deixou de ser apenas tela de cadastro e passou a operar como central de solicitações com revisão e aprovação."],
+      ["23/06","Workflow","Fluxo com rastreabilidade","Solicitações passaram a ter persistência, histórico e proteção de documentos conforme perfil e participação no processo."],
+      ["24/06","Protótipo","Protótipo governado consolidado","Fluxo de solicitante e aprovador foi organizado, validado e integrado em jornada única de ponta a ponta."],
+      ["25/06","Experiência","Evolução da experiência visual","Interface recebeu revisão ampla para melhorar clareza, navegação e entendimento do processo por cada perfil."],
+      ["29/06","Frontend","Reconstrução controlada da interface","Frontend antigo foi substituído por base mais limpa, preservando integrações e preparando evolução sustentável."],
+      ["01/07","Backend","Backend documentado e reproduzível","Estrutura de dados, regras e integrações passou a ter documentação e pacote técnico para implantação controlada."],
+      ["02/07","Integração","Nova experiência integrada","Novo frontend foi conectado ao backend existente, reunindo navegação, workflow e operações em solução única."],
+      ["03/07","SAP","ERSA validado com dados reais","Campos e estrutura do material ERSA foram mapeados diretamente no SAP, reduzindo suposições e risco de cadastro incorreto."],
+      ["06/07","Modelos","Modelos integrados ao workflow","Modelos cadastrais passaram a orientar novas solicitações, revisão do aprovador e consulta de materiais."],
+      ["07/07","Estabilidade","Projeto estabilizado","Repositório, dependências, documentação e validações foram organizados, criando base segura para continuidade."],
+      ["08/07","Escopo","Escopo priorizado","Foco imediato concentrado em ERSA e HIBE, reduzindo dispersão e acelerando entrega do fluxo com maior valor."],
+      ["09/07","Catálogo","Catálogo ERSA consolidado","Campos, heranças, versões e regras do ERSA foram centralizados, garantindo consistência entre configuração e solicitação."],
+      ["10/07","SAP","Fluxo completo validado no SAP","CDM concluiu ciclo de solicitação, aprovação e envio, com criação real de material e retorno do código SAP."],
+      ["14/07","Busca","Busca e acompanhamento aprimorados","Pesquisa de similares, navegação e histórico do aprovador foram refinados, ampliando prevenção de duplicidade e visibilidade."]
+    ];
+    return {
+      marcos: dados.map((d, i) => {
+        const m = {
+          data: d[0], rotulo: d[1], titulo: d[2], texto: d[3],
+          img: d[4] || ("assets/timeline-" + String(i + 1).padStart(2, "0") + ".webp")
+        };
+        m.abrir = () => this.setState({ aberto: m });
+        return m;
+      }),
+      modalVisivel: !!this.state.aberto,
+      imagemAberta: this.state.aberto || { img: "", titulo: "", data: "" },
+      modalImagem: this.state.aberto ? React.createElement("img", {
+        src: this.state.aberto.img, alt: this.state.aberto.titulo,
+        style: { display: "block", maxWidth: "100%", maxHeight: "82vh", margin: "0 auto", borderRadius: "12px" }
+      }) : null,
+      fecharModal: () => this.setState({ aberto: null }),
+      pararClique: (e) => e.stopPropagation(),
+      mostrarImagens: this.props.mostrarImagens ?? true,
+      mostrarOrbita: this.props.mostrarOrbita ?? true,
+      ocultarQuebrada: (e) => { e.target.style.display = "none"; }
+    };
+  }
+}
+</script>
+</body>
+</html>
