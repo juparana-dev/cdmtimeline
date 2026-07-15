@@ -99,7 +99,7 @@ a{color:#45813C}a:hover{color:#315f2b}
               <p style="margin:14px 0 0;max-width:480px;font-size:17px;line-height:1.6;color:#5f685e;animation:reveal .8s ease both;animation-timeline:view();animation-range:entry 0% entry 60%">{{ m.texto }}</p>
               <sc-if value="{{ mostrarImagens }}" hint-placeholder-val="{{ true }}">
                 <div style="position:relative;margin-top:28px;max-width:480px;aspect-ratio:3/2;overflow:hidden;border:1px solid #e4e8e2;border-radius:16px;background:repeating-linear-gradient(45deg,#f6f8f5 0 14px,#f0f3ee 14px 28px);box-shadow:0 18px 45px rgba(23,32,22,.10);animation:reveal .9s ease both;animation-timeline:view();animation-range:entry 0% entry 70%">
-                  <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:ui-monospace,Menlo,monospace;font-size:12px;color:#8a938a">{{ m.img }}</div>
+                  <div data-image-fallback="true" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:4px;font-size:14px;font-weight:600;letter-spacing:.02em;color:#8a938a"><span>Imagem</span><span>{{ m.numero }}</span><span>em preparação</span></div>
                   <img src="{{ m.img }}" alt="{{ m.titulo }}" loading="lazy" onError="{{ ocultarQuebrada }}" onClick="{{ m.abrir }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;cursor:zoom-in;transition:transform .5s ease" style-hover="transform:scale(1.03)">
                   <div data-marco-borda="true" aria-hidden="true" style="position:absolute;inset:0;z-index:2;border-radius:16px;padding:2px;background:linear-gradient(135deg,#45813C,#EEB41E);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask-composite:exclude;opacity:0;transform:scale(.985);transition:opacity .5s ease,transform .5s ease;pointer-events:none"></div>
                 </div>
@@ -184,7 +184,7 @@ class Component extends DCLogic {
   renderVals() {
     const dados = [
       ["02/06","Governança","Governança de acessos estabilizada","Permissões críticas protegidas, recuperação de acesso concluída e riscos de perda indevida de perfil eliminados."],
-      ["03/06","Importação","Importação em lote operacional","CDM passou a processar cadastros em massa com validação, acompanhamento por item e retorno do resultado do SAP.","assets/timeline-02.png"],
+      ["03/06","Importação","Importação em lote operacional","CDM passou a processar cadastros em massa com validação, acompanhamento por item e retorno do resultado do SAP."],
       ["04/06","Padronização","Cadastro padronizado","Formulário, configurações e importação passaram a usar mesma estrutura, reduzindo divergências e retrabalho."],
       ["11/06","Dados","Base única consolidada","Estrutura oficial do cadastro foi consolidada como fonte única para telas, regras e templates do CDM."],
       ["22/06","Governança","Novo modelo de governança","CDM deixou de ser apenas tela de cadastro e passou a operar como central de solicitações com revisão e aprovação."],
@@ -204,9 +204,10 @@ class Component extends DCLogic {
     ];
     return {
       marcos: dados.map((d, i) => {
+        const numero = String(i + 1).padStart(2, "0");
         const m = {
-          data: d[0], rotulo: d[1], titulo: d[2], texto: d[3],
-          img: d[4] || ("assets/timeline-" + String(i + 1).padStart(2, "0") + ".webp")
+          data: d[0], rotulo: d[1], titulo: d[2], texto: d[3], numero,
+          img: "assets/timeline-" + numero + ".webp"
         };
         m.abrir = () => this.setState({ aberto: m });
         return m;
