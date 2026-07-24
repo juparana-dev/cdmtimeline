@@ -32,3 +32,21 @@ test("derives marker state through named normalization methods", () => {
   assert.match(html, /const status = indiceMarcador === -1/);
   assert.match(html, /ehMarcador:\s*index === indiceMarcador/);
 });
+
+test("renders marker state and focusable timeline articles", () => {
+  assert.match(html, /data-marco-status="\{\{ m\.status \}\}"/);
+  assert.match(html, /data-marco-atual="\{\{ m\.ehMarcador \}\}"/);
+  assert.match(html, /tabindex="-1"/);
+  assert.match(html, /classList\.toggle\("marco-em-foco", ativo\)/);
+});
+
+test("uses an accessible CDM orbital trigger", () => {
+  assert.match(html, /<button[\s\S]*?data-orbit-trigger="true"/);
+  assert.match(html, /aria-label="Ir até marco atual"/);
+  assert.match(html, /aria-disabled="\{\{ orbitaDesabilitada \}\}"/);
+  assert.match(html, /onClick="\{\{ viajarAteMarcador \}\}"/);
+  assert.match(html, /data-orbit-scene="true"/);
+  assert.match(html, /data-orbit-ring="inner"/);
+  assert.match(html, /data-orbit-ring="middle"/);
+  assert.match(html, /data-orbit-ring="outer"/);
+});
