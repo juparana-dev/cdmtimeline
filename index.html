@@ -146,6 +146,60 @@ a{color:#45813C}a:hover{color:#315f2b}
 <script type="text/x-dc" data-dc-script data-props="{&quot;mostrarImagens&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Conteúdo&quot;},&quot;mostrarOrbita&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Herói&quot;}}">
 class Component extends DCLogic {
   state = { aberto: null };
+  abrirMidia(marco) {
+    this.setState({ aberto: marco });
+  }
+
+  validarMarcador(dados) {
+    const markerIndexes = dados
+      .map((item, index) => item.lidoAteAqui === true ? index : -1)
+      .filter((index) => index >= 0);
+
+    if (markerIndexes.length === 0) {
+      console.warn("[timeline] Nenhum item est? marcado como lidoAteAqui.");
+      return -1;
+    }
+
+    if (markerIndexes.length > 1) {
+      console.warn("[timeline] Mais de um marcador encontrado. Primeiro marcador será usado.");
+    }
+
+    return markerIndexes[0];
+  }
+
+  normalizarMarcos(dados) {
+    const indiceMarcador = this.validarMarcador(dados);
+
+    const marcos = dados.map((item, index) => {
+      const numero = String(index + 1).padStart(2, "0");
+      const status = indiceMarcador === -1
+        ? "normal"
+        : index < indiceMarcador
+          ? "jaLido"
+          : index === indiceMarcador
+            ? "marcador"
+            : "normal";
+
+      const marco = {
+        ...item,
+        numero,
+        status,
+        ehMarcador: index === indiceMarcador,
+        ehVideo: item.media.type === "video",
+        cardSrc: item.media.type === "video" ? item.media.poster : item.media.src,
+        img: item.media.type === "video" ? item.media.poster : item.media.src,
+        ariaAbrir: item.media.type === "video"
+          ? `Reproduzir vídeo: ${item.titulo}`
+          : `Ampliar imagem: ${item.titulo}`
+      };
+
+      marco.abrir = () => this.abrirMidia(marco);
+      return marco;
+    });
+
+    return { marcos, indiceMarcador };
+  }
+
   componentDidMount() {
     this._onKey = (e) => { if (e.key === "Escape") this.setState({ aberto: null }); };
     document.addEventListener("keydown", this._onKey);
@@ -183,35 +237,164 @@ class Component extends DCLogic {
   }
   renderVals() {
     const dados = [
-      ["02/06","Governança","Governança de acessos estabilizada","Permissões críticas protegidas, recuperação de acesso concluída e riscos de perda indevida de perfil eliminados."],
-      ["03/06","Importação","Importação em lote operacional","CDM passou a processar cadastros em massa com validação, acompanhamento por item e retorno do resultado do SAP."],
-      ["04/06","Padronização","Cadastro padronizado","Formulário, configurações e importação passaram a usar mesma estrutura, reduzindo divergências e retrabalho."],
-      ["11/06","Dados","Base única consolidada","Estrutura oficial do cadastro foi consolidada como fonte única para telas, regras e templates do CDM."],
-      ["22/06","Governança","Novo modelo de governança","CDM deixou de ser apenas tela de cadastro e passou a operar como central de solicitações com revisão e aprovação."],
-      ["23/06","Workflow","Fluxo com rastreabilidade","Solicitações passaram a ter persistência, histórico e proteção de documentos conforme perfil e participação no processo."],
-      ["24/06","Protótipo","Protótipo governado consolidado","Fluxo de solicitante e aprovador foi organizado, validado e integrado em jornada única de ponta a ponta."],
-      ["25/06","Experiência","Evolução da experiência visual","Interface recebeu revisão ampla para melhorar clareza, navegação e entendimento do processo por cada perfil."],
-      ["29/06","Frontend","Reconstrução controlada da interface","Frontend antigo foi substituído por base mais limpa, preservando integrações e preparando evolução sustentável."],
-      ["01/07","Backend","Backend documentado e reproduzível","Estrutura de dados, regras e integrações passou a ter documentação e pacote técnico para implantação controlada."],
-      ["02/07","Integração","Nova experiência integrada","Novo frontend foi conectado ao backend existente, reunindo navegação, workflow e operações em solução única."],
-      ["03/07","SAP","ERSA validado com dados reais","Campos e estrutura do material ERSA foram mapeados diretamente no SAP, reduzindo suposições e risco de cadastro incorreto."],
-      ["06/07","Modelos","Modelos integrados ao workflow","Modelos cadastrais passaram a orientar novas solicitações, revisão do aprovador e consulta de materiais."],
-      ["07/07","Estabilidade","Projeto estabilizado","Repositório, dependências, documentação e validações foram organizados, criando base segura para continuidade."],
-      ["08/07","Escopo","Escopo priorizado","Foco imediato concentrado em ERSA e HIBE, reduzindo dispersão e acelerando entrega do fluxo com maior valor."],
-      ["09/07","Catálogo","Catálogo ERSA consolidado","Campos, heranças, versões e regras do ERSA foram centralizados, garantindo consistência entre configuração e solicitação."],
-      ["10/07","SAP","Fluxo completo validado no SAP","CDM concluiu ciclo de solicitação, aprovação e envio, com criação real de material e retorno do código SAP."],
-      ["14/07","Busca","Busca e acompanhamento aprimorados","Pesquisa de similares, navegação e histórico do aprovador foram refinados, ampliando prevenção de duplicidade e visibilidade."]
+      {
+        data: "02/06",
+        rotulo: "Governança",
+        titulo: "Governança de acessos estabilizada",
+        texto: "Permissões críticas protegidas, recuperação de acesso concluída e riscos de perda indevida de perfil eliminados.",
+        media: { type: "image", src: "assets/timeline-01.webp" }
+      },
+      {
+        data: "03/06",
+        rotulo: "Importação",
+        titulo: "Importação em lote operacional",
+        texto: "CDM passou a processar cadastros em massa com validação, acompanhamento por item e retorno do resultado do SAP.",
+        media: { type: "image", src: "assets/timeline-02.webp" }
+      },
+      {
+        data: "04/06",
+        rotulo: "Padronização",
+        titulo: "Cadastro padronizado",
+        texto: "Formulário, configurações e importação passaram a usar mesma estrutura, reduzindo divergências e retrabalho.",
+        media: { type: "image", src: "assets/timeline-03.webp" }
+      },
+      {
+        data: "11/06",
+        rotulo: "Dados",
+        titulo: "Base única consolidada",
+        texto: "Estrutura oficial do cadastro foi consolidada como fonte única para telas, regras e templates do CDM.",
+        media: { type: "image", src: "assets/timeline-04.webp" }
+      },
+      {
+        data: "22/06",
+        rotulo: "Governança",
+        titulo: "Novo modelo de governança",
+        texto: "CDM deixou de ser apenas tela de cadastro e passou a operar como central de solicitações com revisão e aprovação.",
+        media: { type: "image", src: "assets/timeline-05.webp" }
+      },
+      {
+        data: "23/06",
+        rotulo: "Workflow",
+        titulo: "Fluxo com rastreabilidade",
+        texto: "Solicitações passaram a ter persistência, histórico e proteção de documentos conforme perfil e participação no processo.",
+        media: { type: "image", src: "assets/timeline-06.webp" }
+      },
+      {
+        data: "24/06",
+        rotulo: "Protótipo",
+        titulo: "Protótipo governado consolidado",
+        texto: "Fluxo de solicitante e aprovador foi organizado, validado e integrado em jornada única de ponta a ponta.",
+        media: { type: "image", src: "assets/timeline-07.webp" }
+      },
+      {
+        data: "25/06",
+        rotulo: "Experiência",
+        titulo: "Evolução da experiência visual",
+        texto: "Interface recebeu revisão ampla para melhorar clareza, navegação e entendimento do processo por cada perfil.",
+        media: { type: "image", src: "assets/timeline-08.webp" }
+      },
+      {
+        data: "29/06",
+        rotulo: "Frontend",
+        titulo: "Reconstrução controlada da interface",
+        texto: "Frontend antigo foi substituído por base mais limpa, preservando integrações e preparando evolução sustentável.",
+        media: { type: "image", src: "assets/timeline-09.webp" }
+      },
+      {
+        data: "01/07",
+        rotulo: "Backend",
+        titulo: "Backend documentado e reproduzível",
+        texto: "Estrutura de dados, regras e integrações passou a ter documentação e pacote técnico para implantação controlada.",
+        media: { type: "image", src: "assets/timeline-10.webp" }
+      },
+      {
+        data: "02/07",
+        rotulo: "Integração",
+        titulo: "Nova experiência integrada",
+        texto: "Novo frontend foi conectado ao backend existente, reunindo navegação, workflow e operações em solução única.",
+        media: { type: "image", src: "assets/timeline-11.webp" }
+      },
+      {
+        data: "03/07",
+        rotulo: "SAP",
+        titulo: "ERSA validado com dados reais",
+        texto: "Campos e estrutura do material ERSA foram mapeados diretamente no SAP, reduzindo suposições e risco de cadastro incorreto.",
+        media: { type: "image", src: "assets/timeline-12.webp" }
+      },
+      {
+        data: "06/07",
+        rotulo: "Modelos",
+        titulo: "Modelos integrados ao workflow",
+        texto: "Modelos cadastrais passaram a orientar novas solicitações, revisão do aprovador e consulta de materiais.",
+        media: { type: "image", src: "assets/timeline-13.webp" }
+      },
+      {
+        data: "07/07",
+        rotulo: "Estabilidade",
+        titulo: "Projeto estabilizado",
+        texto: "Repositório, dependências, documentação e validações foram organizados, criando base segura para continuidade.",
+        media: { type: "image", src: "assets/timeline-14.webp" }
+      },
+      {
+        data: "08/07",
+        rotulo: "Escopo",
+        titulo: "Escopo priorizado",
+        texto: "Foco imediato concentrado em ERSA e HIBE, reduzindo dispersão e acelerando entrega do fluxo com maior valor.",
+        media: { type: "image", src: "assets/timeline-15.webp" }
+      },
+      {
+        data: "09/07",
+        rotulo: "Catálogo",
+        titulo: "Catálogo ERSA consolidado",
+        texto: "Campos, heranças, versões e regras do ERSA foram centralizados, garantindo consistência entre configuração e solicitação.",
+        media: { type: "image", src: "assets/timeline-16.webp" }
+      },
+      {
+        data: "10/07",
+        rotulo: "SAP",
+        titulo: "Fluxo completo validado no SAP",
+        texto: "CDM concluiu ciclo de solicitação, aprovação e envio, com criação real de material e retorno do código SAP.",
+        media: { type: "image", src: "assets/timeline-17.webp" }
+      },
+      {
+        data: "14/07",
+        rotulo: "Busca",
+        titulo: "Busca e acompanhamento aprimorados",
+        texto: "Pesquisa de similares, navegação e histórico do aprovador foram refinados, ampliando prevenção de duplicidade e visibilidade.",
+        media: { type: "image", src: "assets/timeline-18.webp" },
+        lidoAteAqui: true
+      },
+      {
+        data: "16/07",
+        rotulo: "Evolução",
+        titulo: "Novo marco de evolução",
+        texto: "Registro visual do avanço realizado em 16/07. O texto definitivo será inserido após revisão editorial.",
+        media: { type: "image", src: "assets/timeline-19.webp" }
+      },
+      {
+        data: "21/07",
+        rotulo: "Continuidade",
+        titulo: "Evolução consolidada",
+        texto: "Registro visual do avanço realizado em 21/07. O texto definitivo será inserido após revisão editorial.",
+        media: { type: "image", src: "assets/timeline-20.webp" }
+      },
+      {
+        data: "23/07",
+        rotulo: "Demonstração",
+        titulo: "Evolução em movimento",
+        texto: "Demonstração em vídeo do avanço registrado em 23/07. O texto definitivo será inserido após revisão editorial.",
+        media: {
+          type: "video",
+          src: "assets/timeline-21.mp4",
+          poster: "assets/timeline-21.webp"
+        }
+      }
     ];
+
+    const { marcos, indiceMarcador } = this.normalizarMarcos(dados);
     return {
-      marcos: dados.map((d, i) => {
-        const numero = String(i + 1).padStart(2, "0");
-        const m = {
-          data: d[0], rotulo: d[1], titulo: d[2], texto: d[3], numero,
-          img: "assets/timeline-" + numero + ".webp"
-        };
-        m.abrir = () => this.setState({ aberto: m });
-        return m;
-      }),
+      marcos,
+      indiceMarcador,
       modalVisivel: !!this.state.aberto,
       imagemAberta: this.state.aberto || { img: "", titulo: "", data: "" },
       modalImagem: this.state.aberto ? React.createElement("img", {
