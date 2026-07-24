@@ -50,3 +50,27 @@ test("uses an accessible CDM orbital trigger", () => {
   assert.match(html, /data-orbit-ring="middle"/);
   assert.match(html, /data-orbit-ring="outer"/);
 });
+
+test("uses poster-only cards for video and a mixed-media modal", () => {
+  assert.match(html, /src="\{\{ m\.cardSrc \}\}"/);
+  assert.match(html, /value="\{\{ m\.ehVideo \}\}"/);
+  assert.match(html, /data-video-play="true"/);
+  assert.match(html, /\{\{ modalMidia \}\}/);
+  assert.match(html, /renderModalMedia\(\)/);
+});
+
+test("configures modal video for silent looping inline playback", () => {
+  assert.match(html, /React\.createElement\("video"/);
+  assert.match(html, /autoPlay:\s*true/);
+  assert.match(html, /loop:\s*true/);
+  assert.match(html, /muted:\s*true/);
+  assert.match(html, /playsInline:\s*true/);
+  assert.match(html, /preload:\s*"metadata"/);
+  assert.match(html, /currentTime = 0/);
+  assert.match(html, /Vídeo indisponível/);
+});
+
+test("closes media through Escape using the same cleanup path", () => {
+  assert.match(html, /if \(e\.key === "Escape"\) this\.fecharModal\(\)/);
+  assert.match(html, /onClick="\{\{ fecharModal \}\}"/);
+});
