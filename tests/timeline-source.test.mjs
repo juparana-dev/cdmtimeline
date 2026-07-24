@@ -74,3 +74,50 @@ test("closes media through Escape using the same cleanup path", () => {
   assert.match(html, /if \(e\.key === "Escape"\) this\.fecharModal\(\)/);
   assert.match(html, /onClick="\{\{ fecharModal \}\}"/);
 });
+
+test("implements orbital travel with custom easing and lifecycle cleanup", () => {
+  assert.match(html, /easeInOutCubic/);
+  assert.match(html, /animarScroll\(destino, duracao\)/);
+  assert.match(html, /async viajarAteMarcador\(\)/);
+  assert.match(html, /agendarFrame\(callback\)/);
+  assert.match(html, /this\._travelRafs = new Set\(\)/);
+  assert.match(html, /this\._travelRafs\.delete\(raf\)/);
+  assert.match(html, /this\.agendarFrame\(\(\) => this\.agendarFrame\(resolve\)\)/);
+  assert.match(html, /orbit-traveling/);
+  assert.match(html, /marco-chegada/);
+  assert.match(html, /data-space-overlay="true"/);
+  assert.match(html, /this\._travelRafs\.forEach\(\(raf\) => cancelAnimationFrame\(raf\)\)/);
+});
+
+test("restores orbital scroll resources when a frame throws", () => {
+  assert.match(html, /return new Promise\(\(resolve, reject\) =>/);
+  assert.match(html, /catch \(error\) \{\s*finalizar\(\);\s*reject\(error\);/);
+  assert.match(html, /container\.style\.scrollBehavior = scrollBehaviorAnterior/);
+});
+
+test("guards concurrent travel and clears every tracked resource", () => {
+  assert.match(html, /if \(this\._isTraveling\) return/);
+  assert.match(html, /this\._isTraveling = true/);
+  assert.match(html, /this\._isTraveling = false/);
+  assert.match(html, /this\._travelTimers\.forEach\(\(timer\) => clearTimeout\(timer\)\)/);
+  assert.match(html, /classList\.remove\("orbit-traveling"\)/);
+  assert.match(html, /classList\.remove\("marco-chegada"\)/);
+});
+test("uses the actual scroll container for orbital travel", () => {
+  assert.match(html, /obterScrollContainer\(\)/);
+  assert.match(html, /document\.body\.scrollHeight > document\.documentElement\.scrollHeight/);
+  assert.match(html, /const inicio = container\.scrollTop/);
+  assert.match(html, /container\.scrollTop = inicio \+ distancia/);
+  assert.match(html, /container\.scrollHeight - container\.clientHeight/);
+});
+test("uses reduced-motion fallback without space overlay", () => {
+  assert.match(html, /matchMedia\("\(prefers-reduced-motion: reduce\)"\)/);
+  assert.match(html, /scrollIntoView\(\{ block: "center" \}\)/);
+  assert.match(html, /focus\(\{ preventScroll: true \}\)/);
+});
+
+test("keeps generated runtime as the single external runtime script", () => {
+  const runtimeReferences = html.match(/support\.js/g) ?? [];
+  assert.equal(runtimeReferences.length, 1);
+  assert.match(html, /<script src="support\.js"><\/script>/);
+});
