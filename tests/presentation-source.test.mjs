@@ -13,6 +13,7 @@ test("timeline preserves the original runtime behind a wrapper and exposes Prese
   assert.equal(exists("support-runtime.js"), true);
   const wrapper = read("support.js");
   assert.match(wrapper, /support-runtime\.js/);
+  assert.match(wrapper, /document\.write\('<script src="support-runtime\.js"><' \+ '\/script>'\)/);
   assert.match(wrapper, /querySelector\(['"]header['"]\)/);
   assert.match(wrapper, /data-cdm-presentation-link/);
   assert.match(wrapper, /href\s*=\s*['"]apresentacao\//);
@@ -57,11 +58,17 @@ test("presentation is static and GitHub Pages friendly", () => {
   assert.equal(/(?:src|href)="\/(?!\/)/.test(html), false, "root-absolute asset reference found");
 });
 
-test("presentation uses the supplied CDM motion asset and current V3 horizontal identity", () => {
+test("presentation uses the supplied CDM motion geometry and core identity timing", () => {
   assert.equal(exists("apresentacao/assets/cdm-loader-symmetric.svg"), true);
   const html = read("apresentacao/index.html");
   const loader = read("apresentacao/assets/cdm-loader-symmetric.svg");
   assert.match(loader, /data-asset-role="functional-loader"/);
+  assert.match(loader, /data-loader-layer="structure"/);
+  assert.match(loader, /data-loader-layer="database"/);
+  assert.match(loader, /cdmStructureIn/);
+  assert.match(loader, /560ms cubic-bezier/);
+  assert.match(loader, /760ms 140ms cubic-bezier/);
+  assert.match(loader, /prefers-reduced-motion: reduce/);
   assert.match(loader, /#45813c/i);
   assert.match(loader, /#eeb41e/i);
   assert.match(html, /assets\/cdm-loader-symmetric\.svg/);
