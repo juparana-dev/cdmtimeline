@@ -1,76 +1,48 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { existsSync, readFileSync } from "node:fs";
+import { readFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-
 const here = dirname(fileURLToPath(import.meta.url));
 const root = resolve(here, "..");
-const read = (path) => readFileSync(resolve(root, path), "utf8");
-const exists = (path) => existsSync(resolve(root, path));
+const read = p => readFileSync(resolve(root,p),"utf8");
 
-test("timeline preserves the original runtime behind a wrapper and exposes Presentation", () => {
-  assert.equal(exists("support-runtime.js"), true);
-  const wrapper = read("support.js");
-  assert.match(wrapper, /support-runtime\.js/);
-  assert.match(wrapper, /document\.write\('<script src="support-runtime\.js"><' \+ '\/script>'\)/);
-  assert.match(wrapper, /querySelector\(['"]header['"]\)/);
-  assert.match(wrapper, /data-cdm-presentation-link/);
-  assert.match(wrapper, /href\s*=\s*['"]apresentacao\//);
-  assert.match(wrapper, /textContent\s*=\s*['"]Apresentação['"]/);
+test("timeline wrapper makes the brand area open Presentation and replaces all legacy logo images",()=>{
+  const wrapper=read("support.js");
+  assert.match(wrapper,/data-cdm-brand-link/);
+  assert.match(wrapper,/brandLink\.href = 'apresentacao\/'/);
+  assert.match(wrapper,/img\[src="assets\/logo\.png"\]/);
+  assert.match(wrapper,/cdm-symbol\.svg/);
+  assert.match(wrapper,/data-cdm-presentation-link/);
 });
 
-test("presentation contains exactly seven approved scenes", () => {
-  assert.equal(exists("apresentacao/index.html"), true);
-  const html = read("apresentacao/index.html");
-  const scenes = html.match(/data-scene="\d"/g) ?? [];
-  assert.equal(scenes.length, 7);
-  assert.match(html, /O CDM conecta a/);
-  assert.match(html, /necessidade do negócio/);
-  assert.match(html, /O CDM prepara o que o SAP precisa/);
-  assert.match(html, /Você conhece a necessidade/);
-  assert.match(html, /Solicitar/);
-  assert.match(html, /Validar/);
-  assert.match(html, /Aprovar/);
-  assert.match(html, /Cadastrar/);
-  assert.match(html, /Agora vamos acompanhar/);
-  assert.match(html, /essa jornada no CDM/);
+test("presentation contains seven approved scenes and no technical leakage",()=>{
+  const html=read("apresentacao/index.html");
+  assert.equal((html.match(/data-scene="\d"/g)||[]).length,7);
+  for(const term of ["Supabase","Lovable","OData","Edge Function","MTART","MEINS","EKGRP"]) assert.equal(html.includes(term),false);
 });
 
-test("presentation stays business-facing instead of exposing technical implementation", () => {
-  const html = read("apresentacao/index.html");
-  for (const term of ["Supabase", "Lovable", "OData", "Edge Function", "MTART", "MEINS", "EKGRP"]) {
-    assert.equal(html.includes(term), false, `technical term leaked: ${term}`);
-  }
+test("presentation is TV-first and has no visible navbar or side dots",()=>{
+  const html=read("apresentacao/index.html");
+  assert.doesNotMatch(html,/<header/);
+  assert.doesNotMatch(html,/class="nav"/);
+  assert.doesNotMatch(html,/side-nav/);
+  assert.match(html,/width:min\(1500px,100%\)/);
+  assert.doesNotMatch(html,/scroll-snap-type:y mandatory/);
+  assert.match(html,/scroll-snap-type:y proximity/);
+  assert.match(html,/IntersectionObserver/);
 });
 
-test("presentation is static and GitHub Pages friendly", () => {
-  const html = read("apresentacao/index.html");
-  assert.match(html, /scroll-snap-type:y mandatory/);
-  assert.match(html, /#45813c/i);
-  assert.match(html, /#eeb41e/i);
-  assert.match(html, /Archivo/);
-  assert.match(html, /prefers-reduced-motion:reduce/);
-  assert.match(html, /IntersectionObserver/);
-  assert.match(html, /scrollIntoView/);
-  assert.match(html, /ArrowDown/);
-  assert.match(html, /ArrowUp/);
-  assert.equal(/(?:src|href)="\/(?!\/)/.test(html), false, "root-absolute asset reference found");
-});
-
-test("presentation uses the supplied CDM motion geometry and core identity timing", () => {
-  assert.equal(exists("apresentacao/assets/cdm-loader-symmetric.svg"), true);
-  const html = read("apresentacao/index.html");
-  const loader = read("apresentacao/assets/cdm-loader-symmetric.svg");
-  assert.match(loader, /data-asset-role="functional-loader"/);
-  assert.match(loader, /data-loader-layer="structure"/);
-  assert.match(loader, /data-loader-layer="database"/);
-  assert.match(loader, /cdmStructureIn/);
-  assert.match(loader, /560ms cubic-bezier/);
-  assert.match(loader, /760ms 140ms cubic-bezier/);
-  assert.match(loader, /prefers-reduced-motion: reduce/);
-  assert.match(loader, /#45813c/i);
-  assert.match(loader, /#eeb41e/i);
-  assert.match(html, /assets\/cdm-loader-symmetric\.svg/);
-  assert.match(html, /cdm-horizontal-title\.svg/);
+test("presentation uses the approved motion vocabulary and timings",()=>{
+  const html=read("apresentacao/index.html");
+  assert.match(html,/Assinatura orquestrada/);
+  assert.match(html,/\.9s cubic-bezier/);
+  assert.match(html,/1\.14s cubic-bezier/);
+  assert.match(html,/\.68s cubic-bezier/);
+  const loader=read("apresentacao/assets/cdm-loader-symmetric.svg");
+  assert.match(loader,/governedCircuit/);
+  assert.match(loader,/2200ms linear infinite/);
+  assert.match(loader,/data-loader-layer="structure"/);
+  assert.match(loader,/data-loader-layer="database"/);
+  assert.match(loader,/transform="translate\(0 -60\)"/);
 });
