@@ -1,7 +1,7 @@
 (function loadTimelineRuntimeAndPresentationLink() {
   'use strict';
 
-  document.write('<script src="support-runtime.js"><\\/script>');
+  document.write('<script src="support-runtime.js"><' + '/script>');
 
   function mountPresentationLink() {
     if (document.querySelector('[data-cdm-presentation-link]')) return;
