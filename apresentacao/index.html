@@ -2,26 +2,145 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#ffffff">
 <title>CDM | Apresentação</title>
-<style>html,body{margin:0;width:100%;height:100%;background:#fff}body{display:grid;place-items:center;font-family:Arial,sans-serif;color:#45813c}.boot-error{max-width:680px;padding:32px;text-align:center;font-size:16px;line-height:1.5}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--g:#45813c;--gd:#315f2b;--y:#eeb41e;--ink:#172016;--muted:#687067;--line:#dde5da;--paper:#fff;--soft:#f7f9f6;--shadow:0 28px 80px rgba(23,32,22,.10)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:'Archivo',Arial,sans-serif;color:var(--ink);background:#fff;overflow:hidden}button,a{font:inherit}.deck{height:100vh;overflow-y:auto;scroll-snap-type:y mandatory;scroll-behavior:smooth}.scene{position:relative;min-height:100vh;scroll-snap-align:start;display:grid;place-items:center;overflow:hidden;padding:100px 7vw 74px;background:#fff}.scene::before{content:"";position:absolute;inset:auto auto 5% -8%;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,rgba(238,180,30,.10),rgba(238,180,30,0) 68%);pointer-events:none}.scene:nth-child(even)::before{left:auto;right:-7%;background:radial-gradient(circle,rgba(69,129,60,.11),rgba(69,129,60,0) 68%)}
+.topbar{position:fixed;z-index:30;top:0;left:0;right:0;height:72px;display:flex;align-items:center;gap:16px;padding:0 28px;background:rgba(255,255,255,.82);backdrop-filter:blur(18px);border-bottom:1px solid rgba(221,229,218,.75)}.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}.brand img{width:36px;height:36px}.brand strong{font-size:14px}.topbar__spacer{flex:1}.toplink{display:inline-flex;align-items:center;min-height:34px;padding:0 13px;border:1px solid var(--line);border-radius:999px;color:var(--gd);text-decoration:none;font-size:12px;font-weight:700;letter-spacing:.04em;background:#fff;box-shadow:0 8px 24px rgba(23,32,22,.05)}.progress{position:fixed;z-index:31;top:70px;left:0;right:0;height:2px;background:#eef2ed}.progress span{display:block;height:100%;width:14.2857%;background:linear-gradient(90deg,var(--g),var(--y));transition:width .55s cubic-bezier(.2,.8,.2,1)}
+.nav{position:fixed;z-index:30;right:24px;top:50%;transform:translateY(-50%);display:grid;gap:10px}.nav button{width:10px;height:10px;padding:0;border:0;border-radius:50%;background:#d9dfd7;cursor:pointer;transition:.3s}.nav button.is-active{background:var(--g);transform:scale(1.5);box-shadow:0 0 0 5px rgba(69,129,60,.10)}
+.wrap{position:relative;z-index:2;width:min(1180px,100%)}.eyebrow{display:inline-flex;align-items:center;gap:8px;margin-bottom:22px;color:var(--g);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}.eyebrow::before{content:"";width:28px;height:2px;background:var(--y)}h1,h2,p{margin-top:0}.hero h1,.scene h2{max-width:980px;font-size:clamp(44px,6.4vw,88px);line-height:.98;letter-spacing:-.055em;margin-bottom:24px}.scene h2{font-size:clamp(38px,5.2vw,72px)}.lead{max-width:760px;font-size:clamp(18px,2.15vw,27px);line-height:1.42;color:var(--muted);letter-spacing:-.02em}.accent{color:var(--g)}.yellow{color:#bb8500}.caption{font-size:13px;color:#7a8279}.reveal{opacity:.18;transform:translateY(28px) scale(.985);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1)}.scene.is-active .reveal{opacity:1;transform:none}.d1{transition-delay:.10s}.d2{transition-delay:.20s}.d3{transition-delay:.30s}.d4{transition-delay:.40s}
+.hero-grid{display:grid;grid-template-columns:1.12fr .88fr;align-items:center;gap:60px}.hero-card{position:relative;min-height:470px;border:1px solid var(--line);border-radius:36px;background:linear-gradient(145deg,#fff,#f8faf7);box-shadow:var(--shadow);display:grid;place-items:center;overflow:hidden}.hero-card::before,.hero-card::after{content:"";position:absolute;border:1px dashed #cbd5c8;border-radius:50%;animation:spin 24s linear infinite}.hero-card::before{width:340px;height:340px}.hero-card::after{width:460px;height:460px;animation-direction:reverse;animation-duration:34s}.mark{position:relative;z-index:3;width:190px;height:190px;padding:26px;border-radius:50%;background:#fff;box-shadow:0 18px 60px rgba(69,129,60,.18);animation:float 5s ease-in-out infinite}.dot{position:absolute;width:18px;height:18px;border-radius:50%;background:var(--y);box-shadow:0 0 0 9px rgba(238,180,30,.11)}.dot.a{top:17%;left:18%}.dot.b{right:11%;top:49%;background:var(--g);box-shadow:0 0 0 9px rgba(69,129,60,.10)}.dot.c{bottom:14%;left:26%;background:var(--g);box-shadow:0 0 0 9px rgba(69,129,60,.10)}.hero-labels{position:absolute;inset:0;z-index:2}.hero-labels span{position:absolute;padding:9px 13px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.92);font-size:12px;font-weight:700;box-shadow:0 8px 26px rgba(23,32,22,.06)}.hero-labels .l1{top:18%;left:6%}.hero-labels .l2{top:18%;right:6%}.hero-labels .l3{bottom:16%;left:50%;transform:translateX(-50%)}
+.bridge{margin-top:38px;display:grid;grid-template-columns:1fr 150px 1fr;align-items:center;gap:18px}.bridge-card{padding:26px;border:1px solid var(--line);border-radius:24px;background:#fff;box-shadow:0 15px 50px rgba(23,32,22,.06)}.bridge-card small{display:block;margin-bottom:8px;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.12em;font-weight:800}.bridge-card strong{font-size:22px}.bridge-core{display:grid;place-items:center;gap:10px;color:var(--g);font-size:12px;font-weight:800}.bridge-line{width:100%;height:2px;background:linear-gradient(90deg,var(--g),var(--y),var(--g));position:relative;overflow:hidden}.bridge-line::after{content:"";position:absolute;top:-3px;width:8px;height:8px;border-radius:50%;background:#fff;box-shadow:0 0 0 2px var(--y);animation:flow 2.2s linear infinite}
+.role-grid{display:grid;grid-template-columns:1fr 1.15fr 1fr;gap:24px;align-items:stretch;margin-top:46px}.role-side,.role-core{border:1px solid var(--line);border-radius:28px;background:#fff;padding:30px;box-shadow:0 18px 60px rgba(23,32,22,.06)}.role-side h3,.role-core h3{margin:0 0 18px;font-size:24px}.chips{display:flex;flex-wrap:wrap;gap:9px}.chip{padding:9px 12px;border-radius:999px;background:#f4f7f3;color:#4f594e;font-size:12px;font-weight:700}.role-core{position:relative;background:linear-gradient(145deg,#f7fbf6,#fff);box-shadow:0 24px 70px rgba(69,129,60,.12)}.role-core .mini-mark{width:76px;height:76px;float:right;margin:-10px -4px 10px 16px;animation:pulse 3.2s ease-in-out infinite}.role-core ul{margin:20px 0 0;padding:0;list-style:none;display:grid;gap:10px}.role-core li{display:flex;align-items:center;gap:10px;font-weight:700}.role-core li::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--y);box-shadow:0 0 0 5px rgba(238,180,30,.10)}
+.journey{margin-top:50px;display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative}.journey::before{content:"";position:absolute;top:38px;left:9%;right:9%;height:2px;background:#dce4da}.journey-step{position:relative;z-index:2;text-align:center}.journey-step .node{width:76px;height:76px;margin:0 auto 18px;border-radius:50%;display:grid;place-items:center;background:#fff;border:1px solid var(--line);box-shadow:0 12px 34px rgba(23,32,22,.07);font-size:26px;font-weight:800;color:var(--g);transition:.4s}.scene.is-active .journey-step:nth-child(1) .node{animation:journeyPulse 4.8s infinite 0s}.scene.is-active .journey-step:nth-child(2) .node{animation:journeyPulse 4.8s infinite 1.2s}.scene.is-active .journey-step:nth-child(3) .node{animation:journeyPulse 4.8s infinite 2.4s}.scene.is-active .journey-step:nth-child(4) .node{animation:journeyPulse 4.8s infinite 3.6s}.journey-step strong{display:block;font-size:20px}.journey-step span{display:block;margin-top:7px;color:var(--muted);font-size:13px}
+.translator{display:grid;grid-template-columns:1fr 200px 1fr;gap:24px;align-items:center;margin-top:44px}.stack{display:grid;gap:12px}.stack-card{padding:18px 20px;border:1px solid var(--line);border-radius:18px;background:#fff;font-weight:700;box-shadow:0 10px 30px rgba(23,32,22,.05)}.stack-card span{display:block;margin-top:5px;color:var(--muted);font-size:12px;font-weight:500}.translator-core{position:relative;display:grid;place-items:center;min-height:240px}.translator-core::before,.translator-core::after{content:"";position:absolute;border:1px dashed #c9d4c6;border-radius:50%;animation:spin 20s linear infinite}.translator-core::before{width:170px;height:170px}.translator-core::after{width:220px;height:220px;animation-direction:reverse}.translator-core img{position:relative;z-index:2;width:116px;height:116px;padding:12px;background:#fff;border-radius:50%;box-shadow:0 16px 45px rgba(69,129,60,.16)}.sap-ready{border-color:#c6d9c1;background:linear-gradient(145deg,#f5faf3,#fff)}.sap-ready b{color:var(--g)}
+.people{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px}.person{position:relative;min-height:260px;padding:28px;border:1px solid var(--line);border-radius:28px;background:#fff;box-shadow:0 18px 55px rgba(23,32,22,.06);overflow:hidden}.person::after{content:"";position:absolute;right:-35px;bottom:-35px;width:120px;height:120px;border-radius:50%;background:rgba(69,129,60,.06)}.person .ico{width:54px;height:54px;border-radius:17px;display:grid;place-items:center;background:#f1f6ef;color:var(--g);font-size:22px;font-weight:800}.person h3{font-size:24px;margin:22px 0 10px}.person p{color:var(--muted);line-height:1.55}.person:nth-child(2) .ico{background:#fff8e6;color:#a77600}.person:nth-child(3) .ico{background:#eef4ed;color:var(--gd)}
+.loop{margin-top:42px;position:relative;min-height:360px;border:1px solid var(--line);border-radius:34px;background:linear-gradient(145deg,#fff,#f8faf7);box-shadow:var(--shadow);display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;padding:44px;gap:34px;overflow:hidden}.loop::before{content:"";position:absolute;left:18%;right:18%;top:50%;height:2px;background:linear-gradient(90deg,var(--g),var(--y),var(--g))}.loop-card{position:relative;z-index:2;padding:22px;border:1px solid var(--line);border-radius:22px;background:#fff;text-align:center;box-shadow:0 12px 34px rgba(23,32,22,.07)}.loop-card img{width:68px;height:68px}.loop-card strong{display:block;margin-top:13px;font-size:18px}.loop-card small{display:block;margin-top:6px;color:var(--muted)}.loop-return{position:absolute;z-index:3;left:50%;bottom:36px;transform:translateX(-50%);display:flex;gap:10px}.loop-return span{padding:9px 12px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:12px;font-weight:800;box-shadow:0 7px 22px rgba(23,32,22,.06)}
+.final{text-align:center;background:radial-gradient(circle at 50% 46%,rgba(69,129,60,.08),transparent 36%),#fff}.final .wrap{display:grid;justify-items:center}.final-logo{width:min(520px,75vw);height:auto;margin-bottom:38px;filter:drop-shadow(0 18px 30px rgba(23,32,22,.08))}.final h2{max-width:900px}.final .lead{margin-left:auto;margin-right:auto}.final-pill{margin-top:30px;display:inline-flex;align-items:center;gap:10px;padding:11px 16px;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--g);font-size:12px;font-weight:800;box-shadow:0 12px 35px rgba(23,32,22,.06)}.final-pill::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--y);animation:blink 1.6s ease-in-out infinite}
+@keyframes spin{to{transform:rotate(360deg)}}@keyframes float{50%{transform:translateY(-10px)}}@keyframes pulse{50%{transform:scale(1.06);filter:drop-shadow(0 12px 18px rgba(69,129,60,.16))}}@keyframes flow{from{left:-8px}to{left:100%}}@keyframes journeyPulse{0%,18%,100%{transform:scale(1);border-color:var(--line);box-shadow:0 12px 34px rgba(23,32,22,.07)}8%{transform:scale(1.1);border-color:var(--g);box-shadow:0 0 0 9px rgba(69,129,60,.09),0 18px 40px rgba(69,129,60,.15)}}@keyframes blink{50%{opacity:.35;transform:scale(.7)}}
+@media(max-width:900px){body{overflow:auto}.deck{scroll-snap-type:y proximity}.scene{padding:96px 24px 68px}.hero-grid,.role-grid,.translator{grid-template-columns:1fr}.hero-card{min-height:350px}.bridge{grid-template-columns:1fr}.bridge-core{grid-template-columns:1fr 80px 1fr}.journey{grid-template-columns:1fr 1fr;gap:30px}.journey::before{display:none}.people{grid-template-columns:1fr}.loop{grid-template-columns:1fr;padding:26px}.loop::before{display:none}.loop-return{position:static;transform:none;grid-column:1;justify-content:center}.nav{display:none}}
+@media(max-width:560px){.topbar{padding:0 16px}.brand strong{display:none}.scene h1,.scene h2{letter-spacing:-.04em}.journey{grid-template-columns:1fr}.hero-labels{display:none}.hero-card::after{display:none}.loop-return{flex-wrap:wrap}.toplink{font-size:11px}}
+@media(prefers-reduced-motion:reduce){html,.deck{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
 </head>
 <body>
+<header class="topbar">
+  <a class="brand" href="../" aria-label="Voltar para a timeline"><img src="assets/cdm-loader-symmetric.svg" alt=""><strong>CDM</strong></a>
+  <div class="topbar__spacer"></div>
+  <a class="toplink" href="../">Timeline</a>
+</header>
+<div class="progress" aria-hidden="true"><span data-progress></span></div>
+<nav class="nav" aria-label="Navegação da apresentação" data-scene-nav>
+  <button class="is-active" data-go="0" aria-label="Cena 1"></button><button data-go="1" aria-label="Cena 2"></button><button data-go="2" aria-label="Cena 3"></button><button data-go="3" aria-label="Cena 4"></button><button data-go="4" aria-label="Cena 5"></button><button data-go="5" aria-label="Cena 6"></button><button data-go="6" aria-label="Cena 7"></button>
+</nav>
+<main class="deck" data-deck>
+<section class="scene hero is-active" data-scene="0">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow reveal">Central de Dados Mestres</div>
+      <h1 class="reveal d1">O CDM conecta a <span class="accent">necessidade do negócio</span> ao SAP.</h1>
+      <p class="lead reveal d2">A área informa o que conhece. <strong>O CDM prepara o que o SAP precisa.</strong></p>
+      <div class="bridge reveal d3">
+        <div class="bridge-card"><small>Área de negócio</small><strong>Necessidade real</strong></div>
+        <div class="bridge-core"><span>CDM</span><div class="bridge-line"></div></div>
+        <div class="bridge-card"><small>SAP</small><strong>Cadastro estruturado</strong></div>
+      </div>
+    </div>
+    <div class="hero-card reveal d2" aria-hidden="true">
+      <div class="hero-labels"><span class="l1">Negócio</span><span class="l2">Governança</span><span class="l3">SAP</span></div>
+      <span class="dot a"></span><span class="dot b"></span><span class="dot c"></span>
+      <img class="mark" src="assets/cdm-loader-symmetric.svg" alt="">
+    </div>
+  </div>
+</section>
+<section class="scene" data-scene="1">
+  <div class="wrap">
+    <div class="eyebrow reveal">O papel do CDM</div>
+    <h2 class="reveal d1">Você conhece a necessidade. <span class="accent">O CDM conhece o processo.</span></h2>
+    <div class="role-grid">
+      <div class="role-side reveal d2"><h3>Área de negócio</h3><div class="chips"><span class="chip">Contexto</span><span class="chip">Uso</span><span class="chip">Finalidade</span><span class="chip">Necessidade</span></div></div>
+      <div class="role-core reveal d3"><img class="mini-mark" src="assets/cdm-loader-symmetric.svg" alt=""><h3>CDM</h3><ul><li>Regras</li><li>Padrões</li><li>Validações</li><li>Governança</li></ul></div>
+      <div class="role-side reveal d4"><h3>SAP</h3><p class="lead" style="font-size:17px">Recebe um cadastro organizado, consistente e pronto para seguir o processo corporativo.</p></div>
+    </div>
+  </div>
+</section>
+<section class="scene" data-scene="2">
+  <div class="wrap">
+    <div class="eyebrow reveal">Uma jornada governada</div>
+    <h2 class="reveal d1">Cada pessoa atua <span class="accent">na etapa certa.</span></h2>
+    <p class="lead reveal d2">O cadastro deixa de ser uma ação isolada e passa a ser um processo acompanhado.</p>
+    <div class="journey reveal d3">
+      <div class="journey-step"><div class="node">1</div><strong>Solicitar</strong><span>A necessidade começa no negócio</span></div>
+      <div class="journey-step"><div class="node">2</div><strong>Validar</strong><span>As informações são conferidas</span></div>
+      <div class="journey-step"><div class="node">3</div><strong>Aprovar</strong><span>A responsabilidade fica clara</span></div>
+      <div class="journey-step"><div class="node">4</div><strong>Cadastrar</strong><span>O SAP recebe a estrutura correta</span></div>
+    </div>
+  </div>
+</section>
+<section class="scene" data-scene="3">
+  <div class="wrap">
+    <div class="eyebrow reveal">Complexidade traduzida</div>
+    <h2 class="reveal d1">Linguagem de negócio entra. <span class="accent">Estrutura pronta sai.</span></h2>
+    <p class="lead reveal d2">O CDM pergunta o que precisa saber do usuário e cuida da organização antes do SAP.</p>
+    <div class="translator reveal d3">
+      <div class="stack"><div class="stack-card">O que precisa ser cadastrado?<span>Decisão de negócio</span></div><div class="stack-card">Como esse material será utilizado?<span>Contexto da operação</span></div><div class="stack-card">Que características importam?<span>Informação que a área conhece</span></div></div>
+      <div class="translator-core"><img src="assets/cdm-loader-symmetric.svg" alt="CDM"></div>
+      <div class="stack"><div class="stack-card sap-ready"><b>Regras aplicadas</b><span>Consistência antes do envio</span></div><div class="stack-card sap-ready"><b>Informações organizadas</b><span>Estrutura adequada ao cadastro</span></div><div class="stack-card sap-ready"><b>Pronto para o SAP</b><span>Sem exigir linguagem técnica do usuário</span></div></div>
+    </div>
+  </div>
+</section>
+<section class="scene" data-scene="4">
+  <div class="wrap">
+    <div class="eyebrow reveal">Responsabilidade visível</div>
+    <h2 class="reveal d1">O mesmo processo. <span class="accent">Visões diferentes para cada papel.</span></h2>
+    <div class="people">
+      <article class="person reveal d2"><div class="ico">S</div><h3>Solicitante</h3><p>Informa a necessidade, acompanha o andamento e recebe o retorno.</p></article>
+      <article class="person reveal d3"><div class="ico">A</div><h3>Aprovador</h3><p>Analisa, valida e conduz o que precisa de ajuste antes do cadastro.</p></article>
+      <article class="person reveal d4"><div class="ico">G</div><h3>Gestão</h3><p>Enxerga volume, pendências, responsabilidades e evolução da operação.</p></article>
+    </div>
+  </div>
+</section>
+<section class="scene" data-scene="5">
+  <div class="wrap">
+    <div class="eyebrow reveal">O ciclo continua</div>
+    <h2 class="reveal d1">O processo não termina <span class="accent">quando chega ao SAP.</span></h2>
+    <p class="lead reveal d2">O retorno volta para o CDM e permanece disponível para acompanhamento e consulta.</p>
+    <div class="loop reveal d3">
+      <div class="loop-card"><img src="assets/cdm-loader-symmetric.svg" alt=""><strong>CDM</strong><small>Solicitação e governança</small></div>
+      <div class="loop-card"><strong style="font-size:34px;color:var(--g)">→</strong><strong>SAP</strong><small>Cadastro corporativo</small></div>
+      <div class="loop-card"><strong style="font-size:34px;color:#a77600">↩</strong><strong>Retorno</strong><small>Status e material criado</small></div>
+      <div class="loop-return"><span>Solicitou</span><span>Acompanhou</span><span>Encontrou</span></div>
+    </div>
+  </div>
+</section>
+<section class="scene final" data-scene="6">
+  <div class="wrap">
+    <img class="final-logo reveal" src="https://raw.githubusercontent.com/juparana-dev/cdmjuparana/main/src/assets/brand/cdm-horizontal-title.svg" alt="Central de Dados Mestres">
+    <div class="eyebrow reveal d1">Da necessidade ao cadastro</div>
+    <h2 class="reveal d2">Agora vamos acompanhar <span class="accent">essa jornada no CDM.</span></h2>
+    <p class="lead reveal d3">Da linguagem do negócio à integração com o SAP, com governança no caminho.</p>
+    <div class="final-pill reveal d4">Pronto para a demonstração</div>
+  </div>
+</section>
+</main>
 <script>
-(async function boot(){
-  try {
-    if (typeof DecompressionStream !== 'function') throw new Error('Navegador incompatível com a apresentação.');
-    var response = await fetch('presentation.bin');
-    if (!response.ok) throw new Error('Falha ao carregar a apresentação: ' + response.status);
-    var html = await new Response(response.body.pipeThrough(new DecompressionStream('gzip'))).text();
-    document.open();
-    document.write(html);
-    document.close();
-  } catch (error) {
-    console.error(error);
-    document.body.innerHTML = '<div class="boot-error">Não foi possível iniciar a apresentação do CDM. Atualize esta página em um navegador moderno.</div>';
-  }
+(function(){
+  const deck=document.querySelector('[data-deck]');
+  const scenes=[...document.querySelectorAll('[data-scene]')];
+  const dots=[...document.querySelectorAll('[data-go]')];
+  const progress=document.querySelector('[data-progress]');
+  let active=0;
+  function setActive(i){active=Math.max(0,Math.min(i,scenes.length-1));scenes.forEach((s,n)=>s.classList.toggle('is-active',n===active));dots.forEach((b,n)=>b.classList.toggle('is-active',n===active));progress.style.width=((active+1)/scenes.length*100)+'%'}
+  function go(i){const n=Math.max(0,Math.min(i,scenes.length-1));scenes[n].scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});setActive(n)}
+  dots.forEach(b=>b.addEventListener('click',()=>go(Number(b.dataset.go))));
+  addEventListener('keydown',e=>{if(['ArrowDown','PageDown','ArrowRight'].includes(e.key)){e.preventDefault();go(active+1)}if(['ArrowUp','PageUp','ArrowLeft'].includes(e.key)){e.preventDefault();go(active-1)}if(e.key==='Home'){e.preventDefault();go(0)}if(e.key==='End'){e.preventDefault();go(scenes.length-1)}});
+  if('IntersectionObserver'in window){const io=new IntersectionObserver(entries=>{const v=entries.filter(e=>e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];if(v)setActive(scenes.indexOf(v.target))},{root:deck,threshold:[.45,.6,.75]});scenes.forEach(s=>io.observe(s))}
+  setActive(0);
 })();
 </script>
 </body>
