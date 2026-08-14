@@ -1,36 +1,55 @@
 (function loadTimelineRuntimeAndPresentationLink() {
   'use strict';
   document.write('<script src="support-runtime.js"><' + '/script>');
-  var OFFICIAL_SYMBOL = 'https://raw.githubusercontent.com/juparana-dev/cdmjuparana/2b5c9025af2e92a9509c608742403e1b672b6c5b/src/assets/brand/cdm-symbol.svg';
+
+  var SYMBOL = 'https://raw.githubusercontent.com/juparana-dev/cdmjuparana/2b5c9025af2e92a9509c608742403e1b672b6c5b/src/assets/brand/cdm-symbol.svg';
+  var HORIZONTAL = 'https://raw.githubusercontent.com/juparana-dev/cdmjuparana/2b5c9025af2e92a9509c608742403e1b672b6c5b/src/assets/brand/cdm-horizontal-sigla.svg';
 
   function enhanceTimelineBrand() {
     var header = document.querySelector('header');
     if (!header) return;
+
     document.querySelectorAll('img[src="assets/logo.png"]').forEach(function (image) {
-      image.src = OFFICIAL_SYMBOL;
+      image.src = SYMBOL;
     });
 
     if (!header.querySelector('[data-cdm-brand-link]')) {
+      var original = Array.from(header.children).slice(0, 3);
       var brandLink = document.createElement('a');
       brandLink.href = 'apresentacao/';
       brandLink.setAttribute('data-cdm-brand-link', 'true');
       brandLink.setAttribute('aria-label', 'Abrir apresentação do CDM');
       brandLink.style.display = 'inline-flex';
       brandLink.style.alignItems = 'center';
-      brandLink.style.gap = '12px';
-      brandLink.style.color = 'inherit';
+      brandLink.style.width = '290px';
+      brandLink.style.maxWidth = '42vw';
       brandLink.style.textDecoration = 'none';
       brandLink.style.borderRadius = '12px';
-      brandLink.style.padding = '4px 8px 4px 4px';
-      brandLink.style.margin = '-4px 0 -4px -4px';
-      brandLink.style.transition = 'background .2s ease';
-      brandLink.onmouseenter = function () { brandLink.style.background = '#f6f8f5'; };
-      brandLink.onmouseleave = function () { brandLink.style.background = 'transparent'; };
-      var children = Array.from(header.children).slice(0, 3);
-      if (children.length === 3) {
-        header.insertBefore(brandLink, children[0]);
-        children.forEach(function (child) { brandLink.appendChild(child); });
-      }
+      brandLink.style.padding = '5px 8px';
+      brandLink.style.margin = '-5px 0';
+      brandLink.style.transition = 'background .2s ease, transform .2s ease';
+      brandLink.onmouseenter = function () {
+        brandLink.style.background = '#f6f8f5';
+        brandLink.style.transform = 'translateY(-1px)';
+      };
+      brandLink.onmouseleave = function () {
+        brandLink.style.background = 'transparent';
+        brandLink.style.transform = 'translateY(0)';
+      };
+
+      var image = document.createElement('img');
+      image.src = HORIZONTAL;
+      image.alt = 'CDM Central de Dados Mestres';
+      image.style.display = 'block';
+      image.style.width = '100%';
+      image.style.height = '46px';
+      image.style.objectFit = 'contain';
+      image.style.objectPosition = 'left center';
+      brandLink.appendChild(image);
+
+      if (original[0]) header.insertBefore(brandLink, original[0]);
+      else header.appendChild(brandLink);
+      original.forEach(function (child) { child.remove(); });
     }
 
     if (!document.querySelector('[data-cdm-presentation-link]')) {
@@ -56,6 +75,9 @@
     }
   }
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', enhanceTimelineBrand, { once: true });
-  else enhanceTimelineBrand();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', enhanceTimelineBrand, { once: true });
+  } else {
+    enhanceTimelineBrand();
+  }
 })();
